@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name = 'htrc',
     packages = ['htrc'],
-    version = '0.0.3',
+    version = '0.0.4',
     description = 'Set of Python Libraries for HTRC APIs.',
     author='Milinda Pathirage',
     author_email='milinda.pathirage@gmail.com',
