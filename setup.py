@@ -7,7 +7,7 @@ setup(
     description = 'Set of Python Libraries for HTRC APIs.',
     author='Milinda Pathirage',
     author_email='milinda.pathirage@gmail.com',
-    url='https://github.com/milinda/Vessel',
+    url='https://github.com/milinda/htrc-sdk-for-python',
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
