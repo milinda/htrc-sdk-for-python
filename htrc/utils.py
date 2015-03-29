@@ -1,7 +1,7 @@
 __author__ = 'Milinda Pathirage'
 
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 import json
 import zipfile
 import os
@@ -15,17 +15,17 @@ def get_oauth2_token(token_endpoint, client_id, client_secret):
               'client_id': client_id,
               'client_secret': client_secret}
 
-    body = urllib.urlencode(values)
+    body = urllib.parse.urlencode(values)
 
     # request method must be POST
-    req = urllib2.Request(token_endpoint, body, headers)
+    req = urllib.request.Request(token_endpoint, body, headers)
     try:
         # urllib2 module sends HTTP/1.1 requests with Connection:close header included
-        response = urllib2.urlopen(req)
+        response = urllib.request.urlopen(req)
 
         # any other response code means the OAuth2 authentication failed. raise exception
         if response.code != 200:
-            raise urllib2.HTTPError(response.url, response.code, response.read(), response.info(), response.fp)
+            raise urllib.error.HTTPError(response.url, response.code, response.read(), response.info(), response.fp)
 
         # response body is a JSON string
         oauth2_token_response_string = response.read()
@@ -37,7 +37,7 @@ def get_oauth2_token(token_endpoint, client_id, client_secret):
         return oauth2_token_response_json["access_token"]
 
     # response code in the 400-599 range will raise HTTPError
-    except urllib2.HTTPError as e:
+    except urllib.error.HTTPError as e:
         # just re-raise the exception
         raise Exception(str(e.code) + " " + str(e.reason) + " " + str(e.info) + " " + str(e.read()))
 

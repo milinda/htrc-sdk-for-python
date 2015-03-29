@@ -2,10 +2,10 @@ __author__ = 'Milinda Pathirage'
 
 import os
 import io
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 import tempfile
-import utils
+from . import utils
 
 
 class DataAPIClient:
@@ -40,15 +40,15 @@ class DataAPIClient:
 
         volume_id_list = '|'.join(volume_list)
         parameters = {'volumeIDs': volume_id_list}
-        body = urllib.urlencode(parameters)
+        body = urllib.parse.urlencode(parameters)
         request_epr = self.endpoint + "/volumes"
 
-        req = urllib2.Request(request_epr, body, headers)
+        req = urllib.request.Request(request_epr, body, headers)
 
-        response = urllib2.urlopen(req)
+        response = urllib.request.urlopen(req)
 
         if response.code != 200:
-            raise urllib2.HTTPError(response.url, response.code, response.read(), response.info(), response.fp)
+            raise urllib.error.HTTPError(response.url, response.code, response.read(), response.info(), response.fp)
 
         zip_content = io.BytesIO(response.read())
 
